@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     
-   <div class="flex items-center justify-center h-screen">
+   <div class="flex items-cente r justify-center h-screen">
    
    <div className=" flex  flex-col border-2 border-solid border-white justify-center items-center p-5 text-3 w-96 h-auto  font-mono">
     <div className="p-2 font-mono">KNNFitSSense</div>
