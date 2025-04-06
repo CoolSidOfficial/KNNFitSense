@@ -1,0 +1,42 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import joblib
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+
+app = Flask(__name__)
+CORS(app)
+knn = joblib.load('fitness_knn_model.pkl')
+scaler = joblib.load('scaler.pkl')
+
+labels = ['Low', 'High', 'Medium']
+encoder = LabelEncoder()
+encoder.fit(labels)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    # "workout_days", "sleep_hours", "steps_per_day", "bmi", "age", "resting_hr"
+    data = request.get_json(force=True)
+    
+    try:
+            input_features = np.array([[ 
+            data['workout_days'],
+            data['sleep_hours'],
+            data['steps_per_day'],
+            data['bmi'],
+            data['age'],
+            data['resting_hr']
+        ]])
+    except KeyError as e:
+        return jsonify({'error': f'Missing feature: {e}'}), 400
+
+    input_scaled = scaler.transform(input_features)
+    
+    prediction = knn.predict(input_scaled)
+    
+    predicted_label = encoder.inverse_transform(prediction)
+    
+    return jsonify({'predicted_fitness_level': predicted_label[0]})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
