@@ -21,7 +21,7 @@ export default function Home() {
     };
   
     try {
-      const res = await axios.post("http://localhost:8080/predict",data);
+      const res = await axios.post("https://api.20.120.176.155.nip.io/predict",data);
       setPrediction( res.data.predicted_fitness_level); 
       console.log( res.data.predicted_fitness_level)
       form.reset(); 
