@@ -24,7 +24,7 @@ export default function Home() {
 
       // ✅ Hardcoded API URL
       const res = await axios.post(
-        "http://20.193.152.44:8080/predict",
+        "https://20.193.152.44.nip.io/predict",
         data
       );
 
