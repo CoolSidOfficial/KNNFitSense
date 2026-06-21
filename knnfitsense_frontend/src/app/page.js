@@ -22,9 +22,8 @@ export default function Home() {
     try {
       setLoading(true);
 
-      // ✅ Hardcoded API URL
       const res = await axios.post(
-        "https://20.193.152.44.nip.io/predict",
+        "https://fitness.168.144.22.229.nip.io/predict",
         data
       );
 
