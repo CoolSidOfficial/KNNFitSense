@@ -23,7 +23,7 @@ export default function Home() {
       setLoading(true);
 
       const res = await axios.post(
-        "https://fitness.168.144.22.229.nip.io/predict",
+        "https://fitness.20.219.12.237.nip.io/predict",
         data
       );
 
